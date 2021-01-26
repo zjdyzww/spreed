@@ -154,3 +154,15 @@ Sidebar.prototype.close = function() {
 Object.assign(window.OCA.Files, {
 	Sidebar: new Sidebar(),
 })
+
+if (!window.OCA.Talk) {
+	window.OCA.Talk = {}
+}
+window.OCA.Talk.registerMessageAction = (label, callback, icon) => {
+	const messageAction = {
+		label,
+		callback,
+		icon,
+	}
+	store.dispatch('addMessageAction', messageAction)
+}

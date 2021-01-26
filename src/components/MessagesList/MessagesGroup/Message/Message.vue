@@ -119,6 +119,16 @@ the main body of the message as well as a quote.
 						@click.stop="handleReply">
 						{{ t('spreed', 'Reply') }}
 					</ActionButton>
+					<template
+						v-for="action in messageActions">
+						<ActionButton
+							:key="action.label"
+							:icon="action.icon"
+							:close-after-click="true"
+							@click="action.callback">
+							{{ action.label }}
+						</ActionButton>
+					</template>
 				</Actions>
 			</div>
 		</div>
@@ -427,6 +437,10 @@ export default {
 				return t('spreed', 'Failed to send the message. Click to try again')
 			}
 			return t('spreed', 'You can not send messages to this conversation at the moment')
+		},
+
+		messageActions() {
+			return this.$store.getters.messageActions
 		},
 
 	},
